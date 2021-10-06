@@ -1,0 +1,10 @@
+Dos Reglas Principales:
+
+- El State es un dato que cambia y que al cambiar, ocasiona un cambio en la UI.
+
+Color de fondo del Boton
+
+- El State vive en componentes y solo fluye directamente de padres a hijos.
+
+¿Que componentes necesitan de este dato?
+    Color de fonde => BotonRojo

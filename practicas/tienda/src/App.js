@@ -1,18 +1,19 @@
 import React from 'react';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import SearchBox from './components/search-box/search-box.component';
+// import SearchBox from './components/search-box/search-box.component'; UNUSED
 import Item from './components/item/item.component'
+import AppMenu from './components/app-menu/app-menu.component'
 import { useState } from 'react'
 
 
 function App() {
 
   const itemsIniciales = [
-    {id: 1, nombre: "Pantalla", descripcion: "Lorem", foto: ""},
-    {id: 2, nombre: "Celular", descripcion: "Lorem", foto: ""},
-    {id: 3, nombre: "Mouse", descripcion: "Lorem", foto: ""},
-    {id: 4, nombre: "Teclado", descripcion: "Lorem", foto: ""}
+    { id: 1, nombre: "Pantalla", descripcion: "Lorem", foto: "img/screen.jpg" },
+    { id: 2, nombre: "Celular", descripcion: "Lorem", foto: "img/cellphone.jpg" },
+    { id: 3, nombre: "Mouse", descripcion: "Lorem", foto: "img/mouse.jpg" },
+    { id: 4, nombre: "Teclado", descripcion: "Lorem", foto: "img/keyboard.jpg" }
   ]
 
   const [items, setItems] = useState(itemsIniciales);
@@ -25,22 +26,18 @@ function App() {
   }
 
   return (
-    <Container fixed>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <SearchBox onSearch={onSearch}/>
-        </Grid>
-      </Grid>
-      
-      <Grid container style={{marginTop: "10px", padding: "10px"}} spacing={3}>
-
-        {items.map((item, index) => (
+    <div>
+      <AppMenu onSearch={onSearch} />
+      <Container fixed>
+        <Grid container style={{ marginTop: "10px", padding: "10px" }} spacing={3}>
+          {items.map((item, index) => (
             <Grid key={index} item xs={12}>
-              <Item item={item}/>
+              <Item item={item} />
             </Grid>
-        ))}
-      </Grid>
-    </Container>
+          ))}
+        </Grid>
+      </Container>
+    </div>
   );
 }
 

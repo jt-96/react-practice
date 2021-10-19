@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redux</title>
+</head>
+
+<body>
+    <h1>Contador</h1>
+    <div id="texto">1</div> <!-- Lectura de un numero -->
+    <button id="boton">Incrementar</button> <!-- Escritura de un numero -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.1.1/redux.min.js"></script>
+    <script>
+        //Version sin Redux
+        /*         document.getElementById('boton')
+                    .onclick = function () {
+                        let prevValue = Number(document.getElementById('texto').innerHTML);
+                        document.getElementById('texto').innerHTML = prevValue + 1;
+                    } */
+    </script>
+    <script>
+        //Version con Redux
+        /* 
+        Datos Reactivos:
+        numero (Number)
+        */
+
+        //Store: Contenedor para centralizar los datos de una interfaz.
+        //State => Representa los datos actuales del store.
+        //Reducer: Funcion que gestiona el cambio de estado.
+        //Se dispara...
+        //1) Cuando se crea el store, se ejecuta la funcion asociada, y el valor retornado pasa a ser el primer valor del state.
+        //2) Luego se vuelve a ejecutar cada vez de que se solicite un cambio del state, mediante dispatch()
+        //Es decir, cada vez que se escribe un dato.
+        const store = Redux.createStore(function (prevState = { numero: 1 }, action) {
+            //Como cambia el estado, que pasa cuando alguien escribe un dato en este store.
+            console.log('Cambiando el estado', arguments);
+            if (action.type == 'incrementar') {
+                return {
+                    numero: prevState.numero + 1
+                }
+            } else {
+                return prevState
+            }
+        });
+
+        document.getElementById('texto').innerHTML = store.getState().numero;
+
+        //Recien obtengo acceso al store aca
+        store.subscribe(function () {
+            document.getElementById('texto').innerHTML = store.getState().numero;
+        })
+
+        document.getElementById('boton').onclick = function () {
+
+            //Dispatch envia una accion al Store.
+            //Una accion es un objeto plano JS, que tiene un atributo TYPE
+            //Este objeto es recibido por el reducer, y puede usarlo para determinar como cambia el state.
+            store.dispatch({    //Escritura de Datos
+                type: 'incrementar'
+            });
+        };
+    </script>
+</body>
+
+</html>

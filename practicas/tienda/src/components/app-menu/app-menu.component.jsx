@@ -16,6 +16,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 
+import { connect } from 'react-redux'
+
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -49,13 +51,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     width: '100%',
 }));
 
-export default function AppMenu(props) {
+function AppMenu(props) {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
     const cantidadNotificaciones = 2;
-    const cantidadCarrito = 5;
+    const cantidadCarrito = props.cantidadItemsCarrito;
 
     const clickUsuarios = (event) => {
         alert('Click Usuarios')
@@ -201,3 +203,22 @@ export default function AppMenu(props) {
         </Box>
     );
 }
+
+const mapState = (state) => ({
+    cantidadItemsCarrito: state.carrito.items.reduce((prev, actual) => {
+        return prev + actual.cantidad
+    }, 0)
+})
+
+const mapDispatch = (dispatch) => ({
+    onSearch: function (search) {
+        dispatch({
+            type: 'catalogo/SEARCH',
+            search: search
+        })
+    }
+})
+
+const conector = connect(mapState, mapDispatch);
+
+export default conector(AppMenu);

@@ -11,6 +11,6 @@ const Boton = (props) => {
 const mapDispatch = (dispatch) => ({
     incrementar: () => dispatch({ type: 'incrementar' })
 })
-const conector = connect(null, mapDispatch);
+const adaptadorRedux = connect(null, mapDispatch);
 
-export default conector(Boton);
+export default adaptadorRedux(Boton);

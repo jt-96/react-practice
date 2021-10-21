@@ -1,0 +1,7 @@
+ARBOL DE COMPONENTES
+
+
+App (ItemsVisibles)
+    SearchBox (SearchText)
+    Item
+

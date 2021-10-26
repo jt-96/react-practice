@@ -4,15 +4,13 @@ const catalogoState = {
         { id: 2, nombre: "Celular", descripcion: "Lorem", foto: "img/cellphone.jpg" },
         { id: 3, nombre: "Mouse", descripcion: "Lorem", foto: "img/mouse.jpg" },
         { id: 4, nombre: "Teclado", descripcion: "Lorem", foto: "img/keyboard.jpg" }
-    ],
-    filtered: false,
+    ]
 };
 
 function catalogoReducer(prevState = catalogoState, action) {
-    console.log("catalogoReducer");
     switch (action.type) {
 
-        case 'catalogo/SEARCH':
+        /* case 'catalogo/SEARCH':
             const search = action.search;
             const srcItems = prevState.source;
             const filteredItems = srcItems.filter((val) => val.nombre.toLowerCase().includes(search.toLowerCase()));
@@ -21,7 +19,7 @@ function catalogoReducer(prevState = catalogoState, action) {
             return {
                 ...prevState,
                 filtered: filteredItems
-            }
+            } */
         default:
             return prevState;
     }

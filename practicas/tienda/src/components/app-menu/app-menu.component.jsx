@@ -17,6 +17,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -52,6 +53,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function AppMenu(props) {
+
+    const onSearch = (search) => {
+        props.history.replace(`/?s=${search}`)
+    }
+
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -60,7 +66,7 @@ function AppMenu(props) {
     const cantidadCarrito = props.cantidadItemsCarrito;
 
     const clickUsuarios = (event) => {
-        alert('Click Usuarios')
+        props.history.push('/dashboard')
     };
 
     const clickNotificaciones = (event) => {
@@ -68,7 +74,7 @@ function AppMenu(props) {
     };
 
     const clickCarrito = (event) => {
-        alert('Click Carrito')
+        props.history.push('/cart')
     };
 
     const handleMobileMenuClose = () => {
@@ -153,7 +159,7 @@ function AppMenu(props) {
                         <StyledInputBase
                             placeholder="Search…"
                             inputProps={{ 'aria-label': 'search' }}
-                            onInput={(evt) => props.onSearch(evt.target.value)}
+                            onInput={(evt) => onSearch(evt.target.value)}
                         />
                     </Search>
                     <Box sx={{ flexGrow: 1 }} />
@@ -205,20 +211,18 @@ function AppMenu(props) {
 }
 
 const mapState = (state) => ({
-    cantidadItemsCarrito: state.carrito.items.reduce((prev, actual) => {
-        return prev + actual.cantidad
-    }, 0)
+    cantidadItemsCarrito: state.carrito.items.length
 })
 
-const mapDispatch = (dispatch) => ({
+/* const mapDispatch = (dispatch) => ({
     onSearch: function (search) {
         dispatch({
             type: 'catalogo/SEARCH',
             search: search
         })
     }
-})
+}) */
 
-const conector = connect(mapState, mapDispatch);
+const conector = connect(mapState);
 
-export default conector(AppMenu);
+export default withRouter(conector(AppMenu));

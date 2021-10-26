@@ -1,0 +1,9 @@
+/                   =>  HomePage        OK
+/product/id         =>  ProductPage     OK
+/cart               =>  CartPage        OK
+/dashboard               =>  (Redireccion)
+    (Si no hay sesion iniciada)
+    /login          => LoginPage        OK
+
+    (Si hay sesion)
+    /user        => AccountPage | DashboardPage    OK

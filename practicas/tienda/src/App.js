@@ -1,35 +1,39 @@
 import React from 'react';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-// import SearchBox from './components/search-box/search-box.component'; UNUSED
-import Item from './components/item/item.component'
 import AppMenu from './components/app-menu/app-menu.component'
-import { connect } from 'react-redux'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import HomePage from './pages/home-page/home-page.component';
+import CartPage from './pages/cart-page/cart-page.component';
+import ProductPage from './pages/product-page/product-page.component'
+import DashboardPage from './pages/dashboard-page/dashboard-page.component';
+import LoginPage from './pages/login-page/login-page.component';
+import { getCurrentUser } from './redux/user/getters';
+import { connect } from 'react-redux';
 
 function App(props) {
-
   return (
     <div>
       <AppMenu />
-      <Container fixed>
-        <Grid container style={{ marginTop: "10px", padding: "10px" }} spacing={3}>
-          {props.items.map((item, index) => (
-            <Grid key={index} item xs={12}>
-              <Item item={item} />
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+      <Switch>
+        <Route exact path='/' component={HomePage} />
+        <Route path='/product/:id' component={ProductPage} />
+        <Route path='/cart' component={CartPage} />
+        <Route path='/login' component={LoginPage} />
+        <Route path='/dashboard'>
+          {
+            props.isLoggedIn ?
+              <DashboardPage /> :
+              <Redirect to='/login' />
+          }
+        </Route>
+      </Switch>
     </div>
   );
 }
 
+const mapState = state => ({
+  isLoggedIn: getCurrentUser(state)
+})
 
-const adaptadorRedux = connect(function (state) {
-  return {
-    items: state.catalogo.filtered ? state.catalogo.filtered : state.catalogo.source,
-    filtered: state.catalogo.source,
-  }
-});
+const connector = connect(mapState)
 
-export default adaptadorRedux(App);
+export default connector(App);

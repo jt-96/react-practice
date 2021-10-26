@@ -3,12 +3,13 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
+
 
 function Item(props) {
 
   const click = () => {
-    props.addToCart(props.item);
+    props.history.push(`/product/${props.item.id}`)
   }
 
   return (
@@ -33,13 +34,4 @@ function Item(props) {
   );
 }
 
-const mapDispatch = (dispatch) => ({
-  addToCart: (item) => dispatch({
-    type: 'carrito/AGREGAR_ITEM',
-    item: item
-  })
-})
-
-const adaptador = connect(null, mapDispatch);
-
-export default adaptador(Item)
+export default withRouter(Item);

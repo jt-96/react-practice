@@ -33,7 +33,6 @@ function carritoReducer(prevState = carritoState, action) {
                 });
             }
 
-            console.log("carritoReducer Nuevos items", nuevosItems);
             return {
                 ...prevState,
                 items: nuevosItems

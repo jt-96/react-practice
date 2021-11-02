@@ -1,9 +1,9 @@
 const catalogoState = {
     source: [
-        { id: 1, nombre: "Pantalla", descripcion: "Lorem", foto: "img/screen.jpg" },
-        { id: 2, nombre: "Celular", descripcion: "Lorem", foto: "img/cellphone.jpg" },
-        { id: 3, nombre: "Mouse", descripcion: "Lorem", foto: "img/mouse.jpg" },
-        { id: 4, nombre: "Teclado", descripcion: "Lorem", foto: "img/keyboard.jpg" }
+        { id: 1, nombre: "Pantalla", descripcion: "Lorem", foto: "img/screen.jpg", precio: "21000" },
+        { id: 2, nombre: "Celular", descripcion: "Lorem", foto: "img/cellphone.jpg", precio: "12000" },
+        { id: 3, nombre: "Mouse", descripcion: "Lorem", foto: "img/mouse.jpg", precio: "3000" },
+        { id: 4, nombre: "Teclado", descripcion: "Lorem", foto: "img/keyboard.jpg", precio: "4000" }
     ]
 };
 

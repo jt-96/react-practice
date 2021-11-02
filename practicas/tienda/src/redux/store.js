@@ -1,7 +1,8 @@
-import { combineReducers, createStore } from 'redux'
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import carritoReducer from './carrito/reducer';
 import catalogoReducer from './catalogo/reducer';
 import userReducer from './user/reducer';
+import { logger } from 'redux-logger'
 
 const rootReducer = combineReducers({
     carrito: carritoReducer,
@@ -9,6 +10,6 @@ const rootReducer = combineReducers({
     user: userReducer
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(logger));
 
 export default store;

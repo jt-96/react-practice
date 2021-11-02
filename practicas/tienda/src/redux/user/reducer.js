@@ -1,14 +1,21 @@
 const userState = {
-    currentUser: true
+    currentUser: false
 };
 
 export default function userReducer(prevState = userState, action) {
 
     switch (action.type) {
-        case '':
+        case 'user/LOGIN_SUCCESS':
+            return {
+                currentUser: action.user
+            }
 
-            break;
 
+        case 'user/LOGIN_ERROR':
+        case 'user/LOGOUT':
+            return {
+                currentUser: false
+            }
         default:
             return prevState;
     }

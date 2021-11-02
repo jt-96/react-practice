@@ -6,8 +6,9 @@ import CartPage from './pages/cart-page/cart-page.component';
 import ProductPage from './pages/product-page/product-page.component'
 import DashboardPage from './pages/dashboard-page/dashboard-page.component';
 import LoginPage from './pages/login-page/login-page.component';
-import { getCurrentUser } from './redux/user/getters';
+import CheckoutPage from './pages/checkout-page/checkout-page.component';
 import { connect } from 'react-redux';
+import { isLoggedIn } from './redux/user/getters';
 
 function App(props) {
   return (
@@ -18,6 +19,13 @@ function App(props) {
         <Route path='/product/:id' component={ProductPage} />
         <Route path='/cart' component={CartPage} />
         <Route path='/login' component={LoginPage} />
+        <Route path="/checkout">
+          {
+            props.isLoggedIn ?
+              <CheckoutPage /> :
+              <Redirect to='/login' />
+          }
+        </Route>
         <Route path='/dashboard'>
           {
             props.isLoggedIn ?
@@ -31,7 +39,7 @@ function App(props) {
 }
 
 const mapState = state => ({
-  isLoggedIn: getCurrentUser(state)
+  isLoggedIn: isLoggedIn(state)
 })
 
 const connector = connect(mapState)

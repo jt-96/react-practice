@@ -7,6 +7,20 @@ const carritoState = {
 function carritoReducer(prevState = carritoState, action) {
 
     switch (action.type) {
+        case 'carrito/BORRAR_ITEM':
+            return {
+                ...prevState,
+                items: prevState.items.filter((it) => it.id !== action.item.id),
+            }
+
+        case 'carrito/EDITAR_ITEM':
+            return {
+                ...prevState,
+                items: prevState.items
+                    .map((it) => (it.id === action.item.id ? action.item : it))
+                    .filter((it) => it.cantidad > 0)
+            }
+
         case 'carrito/AGREGAR_ITEM':
             const item = action.item;
             let nuevosItems = prevState.items;

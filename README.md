@@ -1,2 +1,2 @@
 # react-practice
-Practicing React, creating multiple projects in different folders.
+React Practice for Digitalers Bootcamp - 2021
